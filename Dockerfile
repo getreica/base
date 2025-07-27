@@ -14,7 +14,7 @@ ENV CMAKE_BUILD_PARALLEL_LEVEL=8
 RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
-    && apt-get install -y --no-install-recommends git git-lfs wget curl zip unzip aria2 ffmpeg libxext6 libxrender1 \
+    && apt-get install -y --no-install-recommends git git-lfs zip unzip aria2 ffmpeg libxext6 libxrender1 \
     && apt-get install -y libgl1-mesa-glx libglib2.0-0 git wget libgl1 \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
@@ -24,9 +24,10 @@ RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install comfy-cli
 RUN pip install comfy-cli
+RUN pip3 install -U gguf blend-modes matplot
 
-# Install ComfyUI
-RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia --version 0.3.26
+# Install ComfyUI with compatible CUDA version
+RUN /usr/bin/yes | comfy --workspace /comfyui install --skip-manager --cuda-version 12.1 --nvidia --version 0.3.45
 
 # Change working directory to ComfyUI
 WORKDIR /comfyui
