@@ -27,7 +27,7 @@ RUN pip install comfy-cli
 RUN pip3 install -U gguf blend-modes matplot
 
 # Install ComfyUI with compatible CUDA version
-RUN /usr/bin/yes | comfy --workspace /comfyui install --skip-manager --cuda-version 12.1 --nvidia --version 0.3.45
+RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 12.1 --nvidia --version 0.3.45
 
 # Change working directory to ComfyUI
 WORKDIR /comfyui
